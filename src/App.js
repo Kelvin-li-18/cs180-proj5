@@ -464,7 +464,7 @@ function App() {
               images: [
                 { title: 'a lithograph of a skull; a lithograph of waterfalls', imageUrl: `${process.env.PUBLIC_URL}/images/effects/skull_waterfall.png` },
                 { title: 'an oil painting of an old man; an oil painting of people around a campfire', imageUrl: `${process.env.PUBLIC_URL}/images/effects/oldman_campfire.jpg` },
-                { title: 'a photo of a dog; a rocket ship', imageUrl: `${process.env.PUBLIC_URL}/images/effects/rocket_dog.jpg` },
+                { title: 'a rocket ship; a photo of a dog', imageUrl: `${process.env.PUBLIC_URL}/images/effects/rocket_dog.jpg` },
               ]
             },
           ]
