@@ -574,6 +574,78 @@ function App() {
             },
           ],
         },
+        {
+          id: 'starting_from_pure_noise',
+          title: 'Starting From Pure Noise',
+          content: [
+            {
+              type: 'paragraph',
+              text: 'We now attempt to train the model, replacing z with pure noise instead of a noised version of x. In this setting, the model is trained to map pure noise to the clean image. However, since the input noise z is independent of the target image x, the model has no information to infer the specific details of x and, in an MSE sense, the optimal solution is to output a constant value – namely, the mean of the training images.'
+            },
+            {
+              type: 'math',
+              text: '\\( \\mathcal{L}(D) = \\mathbb{E}_{z,x} \\Bigl[ \\| D(z) - x \\|^2 \\Bigr] \\)'
+            },
+            {
+              type: 'paragraph',
+              text: 'Here, D(z) is the denoiser and z is drawn from a fixed standard gaussian distribution independent of x. Because z carries no information about x, the best the model can do is output the same constant c for all z. Thus, we set:'
+            },
+            {
+              type: 'math',
+              text: '\\( D(z) = c \\quad \\text{for all } z \\)'
+            },
+            {
+              type: 'paragraph',
+              text: 'Substituting this constant predictor into the loss gives:'
+            },
+            {
+              type: 'math',
+              text: '\\( \\mathcal{L}(c) = \\mathbb{E}_{x} \\Bigl[ \\| c - x \\|^2 \\Bigr] \\)'
+            },
+            {
+              type: 'paragraph',
+              text: 'To find the optimal constant c, we differentiate with respect to c:'
+            },
+            {
+              type: 'math',
+              text: '\\( \\frac{d}{dc} \\mathcal{L}(c) = 2\\Bigl(c - \\mathbb{E}[x]\\Bigr) = 0 \\quad \\Rightarrow \\quad c = \\mathbb{E}[x] \\)'
+            },
+            {
+              type: 'paragraph',
+              text: 'Thus, if the input noise is independent of x, the MSE-optimal denoiser is simply to output the mean of the clean images. This explains why, in one-step denoising from pure noise, the model learns to predict the mean of the test set.'
+            },
+            {
+              type: 'image-grid',
+              columns: 1,
+              images: [
+                {
+                  title: 'Epoch 1',
+                  imageUrl: `${process.env.PUBLIC_URL}/images/pure_noise_denoising_epoch_1.jpg`
+                },
+              ]
+            },
+            {
+              type: 'image-grid',
+              columns: 1,
+              images: [
+                {
+                  title: 'Epoch 1',
+                  imageUrl: `${process.env.PUBLIC_URL}/images/pure_noise_denoising_epoch_5.jpg`
+                },
+              ]
+            },
+            {
+              type: 'image-grid',
+              columns: 1,
+              images: [
+                {
+                  title: 'Epoch 1',
+                  imageUrl: `${process.env.PUBLIC_URL}/images/average_image.png`
+                },
+              ]
+            },
+          ]
+        },
       ],
     },
     {
@@ -581,7 +653,7 @@ function App() {
       title: 'Time-Conditioned DDPM Model',
       sections: [
         {
-          id: 'architecture',
+          id: 'time_cond_architecture',
           title: 'Architecture',
           content: [
             {
@@ -608,7 +680,7 @@ function App() {
           ],
         },
         {
-          id: 'training',
+          id: 'time_cond_training',
           title: 'Training',
           content: [
             {
@@ -641,7 +713,7 @@ function App() {
           ],
         },        
         {
-          id: 'sampling',
+          id: 'time_cond_sampling',
           title: 'Sampling',
           content: [
             {
@@ -676,7 +748,7 @@ function App() {
       title: 'Class and Time Conditioned DDPM Model',
       sections: [
         {
-          id: 'architecture',
+          id: 'time_class_architecture',
           title: 'Architecture',
           content: [
             {
@@ -686,7 +758,7 @@ function App() {
           ],
         },
         {
-          id: 'training',
+          id: 'time_class_training',
           title: 'Training',
           content: [
             {
@@ -707,7 +779,7 @@ function App() {
           ],
         },
         {
-          id: 'sampling',
+          id: 'time_class_sampling',
           title: 'Sampling',
           content: [
             {
